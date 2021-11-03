@@ -12,7 +12,8 @@ from flask_mail import Mail, Message
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
-app = Flask(__name__)
+# app = Flask(__name__)
+
 # app.config['SECRET_KEY'] = 'hard to guess string'
 # app.config['SQLALCHEMY_DATABASE_URI'] =\
 #     'sqlite:///' + os.path.join(basedir, 'data.sqlite')
@@ -26,11 +27,11 @@ app = Flask(__name__)
 # app.config['FLASKY_MAIL_SENDER'] = 'Flasky Admin <flasky@example.com>'
 # app.config['FLASKY_ADMIN'] = os.environ.get('FLASKY_ADMIN')
 
-bootstrap = Bootstrap(app)
-moment = Moment(app)
-db = SQLAlchemy(app)
-migrate = Migrate(app, db)
-mail = Mail(app)
+# bootstrap = Bootstrap(app)
+# moment = Moment(app)
+# db = SQLAlchemy(app)
+# migrate = Migrate(app, db)
+# mail = Mail(app)
 
 
 # << models.py
