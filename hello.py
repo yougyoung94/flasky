@@ -76,9 +76,9 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 #     submit = SubmitField('Submit')
 
 
-@app.shell_context_processor
-def make_shell_context():
-    return dict(db=db, User=User, Role=Role)
+# @app.shell_context_processor
+# def make_shell_context():
+#     return dict(db=db, User=User, Role=Role)
 
 
 # @app.errorhandler(404)
