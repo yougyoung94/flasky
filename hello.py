@@ -3,6 +3,7 @@ from datetime import datetime
 
 from flask import Flask, render_template, session, redirect, url_for
 from flask_bootstrap import Bootstrap
+from flask_migrate import Migrate, MigrateCommand
 from flask_moment import Moment
 from flask_script import Manager
 from flask_sqlalchemy import SQLAlchemy
@@ -22,6 +23,8 @@ manager = Manager(app)
 bootstrap = Bootstrap(app)
 moment = Moment(app)
 db = SQLAlchemy(app)
+migrate = Migrate(app, db)
+manager.add_command('db', MigrateCommand)
 
 
 class Role(db.Model):
