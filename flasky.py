@@ -22,7 +22,7 @@ manager.add_command('db', MigrateCommand)
 @app.cli.command()
 @manager.command
 @click.argument('test_names', nargs=-1)
-def test(test_names):
+def test(test_names=None):
     """Run the unit tests."""
     import unittest
     if test_names:
