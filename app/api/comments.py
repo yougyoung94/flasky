@@ -14,29 +14,29 @@ def get_comments():
     })
 
 
-@api.route('/comments/<int:comment_id>')
-def get_comment(comment_id):
-    comment = Comment.query.get_or_404(comment_id)
+@api.route('/comments/<int:id>')
+def get_comment(id):
+    comment = Comment.query.get_or_404(id)
     return jsonify(comment.to_json())
 
 
-@api.route('/posts/<int:post_id>/comments/')
-def get_post_comments(post_id):
-    post = Post.query.get_or_404(post_id)
+@api.route('/posts/<int:id>/comments/')
+def get_post_comments(id):
+    post = Post.query.get_or_404(id)
     comments = post.comments
     return jsonify({
         'comments': [comment.to_json() for comment in comments],
     })
 
 
-@api.route('/posts/<int:post_id>/comments/', methods=['POST'])
+@api.route('/posts/<int:id>/comments/', methods=['POST'])
 @permission_required(Permission.COMMENT)
-def new_post_comment(post_id):
-    post = Post.query.get_or_404(post_id)
+def new_post_comment(id):
+    post = Post.query.get_or_404(id)
     comment = Comment.from_json(request.json)
     comment.author = g.current_user
     comment.post = post
     db.session.add(comment)
     db.session.commit()
-    return jsonify(comment.to_json(), 201,
-                   {'Location': url_for('api.get_comment', id=comment.id)})
+    return jsonify(comment.to_json()), 201, \
+           {'Location': url_for('api.get_comment', id=comment.id)}

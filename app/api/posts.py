@@ -15,8 +15,8 @@ def new_post():
     post.author = g.current_user
     db.session.add(post)
     db.session.commit()
-    return jsonify(post.to_json(), 201,
-                   {'Location': url_for('api.get_post', id=post.id)})
+    return jsonify(post.to_json()), 201, \
+           {'Location': url_for('api.get_post', id=post.id)}
 
 
 @api.route('/posts/')
@@ -28,17 +28,17 @@ def get_posts():
     })
 
 
-@api.route('/posts/<int:post_id>')
+@api.route('/posts/<int:id>')
 @auth.login_required
-def get_post(post_id):
-    post = Post.query.get_or_404(post_id)
+def get_post(id):
+    post = Post.query.get_or_404(id)
     return jsonify(post.to_json())
 
 
-@api.route('/posts/<int:post_id>', methods=['PUT'])
+@api.route('/posts/<int:id>', methods=['PUT'])
 @permission_required(Permission.WRITE)
-def edit_post(post_id):
-    post = Post.query.get_or_404(post_id)
+def edit_post(id):
+    post = Post.query.get_or_404(id)
     if g.current_user != post.author and \
             not g.current_user.can(Permission.ADMIN):
         return forbidden('Insufficient permissions')
