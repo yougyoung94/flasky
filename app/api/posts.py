@@ -23,7 +23,9 @@ def new_post():
 @auth.login_required
 def get_posts():
     posts = Post.query.all()
-    return jsonify({'posts': [post.to_json() for post in posts]})
+    return jsonify({
+        'posts': [post.to_json() for post in posts],
+    })
 
 
 @api.route('/posts/<int:post_id>')
